@@ -1,7 +1,7 @@
 # FoodTruck_ReactNative
 Food Truck Project
 
-# Some helpful links
+# A few helpful links
 
 ## Setting up React Native
 https://facebook.github.io/react-native/docs/getting-started.html
