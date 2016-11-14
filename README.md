@@ -3,6 +3,11 @@ Food Truck Project
 
 # A few helpful links
 
+http://www.reactnative.com/
+
+## Some libraries for React Native
+https://js.coach/react-native/simple-react-form
+
 ## Setting up React Native
 https://facebook.github.io/react-native/docs/getting-started.html
 
