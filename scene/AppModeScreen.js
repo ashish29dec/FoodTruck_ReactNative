@@ -10,31 +10,46 @@ export default class AppModeScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.buttonPressed = this.buttonPressed.bind(this);
+    this.onAddEditMenuClicked = this.onAddEditMenuClicked.bind(this);
+    this.onOrderModeClicked = this.onOrderModeClicked.bind(this);
+    this.onSeeOrdersClicked = this.onSeeOrdersClicked.bind(this);
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Button
-          onPress={buttonPressed}
-          title='Add/Edit Menu'>
-        </Button>
-        <Button
-          onPress={buttonPressed}
-          title='Order Mode'>
-        </Button>
-        <Button
-          onPress={buttonPressed}
-          title='See Orders'>
-        </Button>
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Add/Edit Menu"
+            onPress={this.onAddEditMenuClicked}>
+          </Button>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Order Mode"
+            onPress={this.onOrderModeClicked}>
+          </Button>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            title="See Orders"
+            onPress={this.onSeeOrdersClicked}>
+          </Button>
+        </View>
       </View>
     );
   }
 
-  buttonPressed(event) {
-    console.log('event: ' + event);
-    Alert.alert('Button has been pressed!');
+  onAddEditMenuClicked() {
+    Alert.alert('Add Edit Menu button clicked!');
+  }
+
+  onOrderModeClicked() {
+    Alert.alert('Order Mode button clicked!');
+  }
+
+  onSeeOrdersClicked() {
+    Alert.alert('See Orders button clicked!');
   }
 }
 
@@ -42,17 +57,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    alignItems: 'stretch',
+    backgroundColor: '#F5FCFF'
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  buttonContainer: {
+    margin: 10
+  }
 });
