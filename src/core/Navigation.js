@@ -7,14 +7,18 @@ import {
 import PropRegistry from './PropRegistry';
 
 var registeredScreens = {};
+var navigatorObj = null;
 
 class Navigation {
   constructor() {
     this.onRightButtonPressed = this.onRightButtonPressed.bind(this);
     this.onBackPressed = this.onBackPressed.bind(this);
+    this.push = this.push.bind(this);
+    this.pop = this.pop.bind(this);
   }
 
   renderScene(route, navigator, emitter) {
+    navigatorObj = navigator;
     let InternalComponent = registeredScreens[route.screenInstanceId]();
     let props = PropRegistry.load(route.screenInstanceId);
     return (<InternalComponent {...props} navigator={navigator} global_emitter={emitter} route={route}/>);
@@ -36,7 +40,7 @@ class Navigation {
           // There is some screen in the history. We must go to it. Display default back button
           return (
             <TouchableHighlight
-              onPress={() => navigationObj.onBackPressed(navigator)}>
+              onPress={() => navigationObj.onBackPressed()}>
               <Text style={styles.navBarTitle}>
                 Back
               </Text>
@@ -82,8 +86,16 @@ class Navigation {
     route.emitter.emit('onRightButtonPressed', {});
   }
 
-  onBackPressed(navigator) {
-    navigator.pop();
+  onBackPressed() {
+    this.pop();
+  }
+
+  push(route) {
+    navigatorObj.push(route);
+  }
+
+  pop() {
+    navigatorObj.pop();
   }
 }
 

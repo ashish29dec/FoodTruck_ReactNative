@@ -17,6 +17,7 @@ import Screen from '../core/Screen';
 import RouteRegistry, {
   SCREEN_INSTANCE_IDS
 } from '../core/RouteRegistry';
+import Navigation from '../core/Navigation';
 
 export default class AppModeScreen extends Screen {
   static getScreenTitleConfig() {
@@ -68,7 +69,7 @@ export default class AppModeScreen extends Screen {
   }
 
   onAddEditMenuClicked() {
-    this.props.navigator.push(RouteRegistry.getRouteWithScreenId(SCREEN_INSTANCE_IDS.ID_ADD_EDIT_MENU_SCREEN));
+    Navigation.push(RouteRegistry.getRouteWithScreenId(SCREEN_INSTANCE_IDS.ID_ADD_EDIT_MENU_SCREEN));
   }
 
   onOrderModeClicked() {

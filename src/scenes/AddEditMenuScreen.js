@@ -15,6 +15,7 @@ import Screen from '../core/Screen';
 import RouteRegistry, {
   SCREEN_INSTANCE_IDS
 } from '../core/RouteRegistry';
+import Navigation from '../core/Navigation';
 
 export default class AddEditMenuScreen extends Screen {
   static getScreenTitleConfig() {
@@ -58,7 +59,7 @@ export default class AddEditMenuScreen extends Screen {
   }
 
   onReceiveRightButtonPressedEvent() {
-    this.props.navigator.push(RouteRegistry.getRouteWithScreenId(SCREEN_INSTANCE_IDS.ID_SECOND_SCREEN));
+    Navigation.push(RouteRegistry.getRouteWithScreenId(SCREEN_INSTANCE_IDS.ID_SECOND_SCREEN));
   }
 }
 

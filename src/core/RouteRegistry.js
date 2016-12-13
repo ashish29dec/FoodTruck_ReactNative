@@ -1,6 +1,7 @@
-import AppModeRoute from '../routes/AppModeRoute';
-import SecondRoute from '../routes/SecondRoute';
-import AddEditMenuRoute from '../routes/AddEditMenuRoute';
+// import AppModeRoute from '../routes/AppModeRoute';
+// import SecondRoute from '../routes/SecondRoute';
+// import AddEditMenuRoute from '../routes/AddEditMenuRoute';
+import Route from './Route';
 var EventEmitter = require('EventEmitter');
 
 export const SCREEN_INSTANCE_IDS = {
@@ -13,9 +14,9 @@ class RouteRegistry {
 
   constructor() {
     this.routeRegistry = {};
-    this.routeRegistry[SCREEN_INSTANCE_IDS.ID_APP_MODE_SCREEN] = () => new AppModeRoute(SCREEN_INSTANCE_IDS.ID_APP_MODE_SCREEN);
-    this.routeRegistry[SCREEN_INSTANCE_IDS.ID_ADD_EDIT_MENU_SCREEN] = () => new AddEditMenuRoute(SCREEN_INSTANCE_IDS.ID_ADD_EDIT_MENU_SCREEN);
-    this.routeRegistry[SCREEN_INSTANCE_IDS.ID_SECOND_SCREEN] = () => new SecondRoute(SCREEN_INSTANCE_IDS.ID_SECOND_SCREEN);
+    this.routeRegistry[SCREEN_INSTANCE_IDS.ID_APP_MODE_SCREEN] = () => new Route(SCREEN_INSTANCE_IDS.ID_APP_MODE_SCREEN);
+    this.routeRegistry[SCREEN_INSTANCE_IDS.ID_ADD_EDIT_MENU_SCREEN] = () => new Route(SCREEN_INSTANCE_IDS.ID_ADD_EDIT_MENU_SCREEN);
+    this.routeRegistry[SCREEN_INSTANCE_IDS.ID_SECOND_SCREEN] = () => new Route(SCREEN_INSTANCE_IDS.ID_SECOND_SCREEN);
   }
 
   getRouteAtIndex(index) {

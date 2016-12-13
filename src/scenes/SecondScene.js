@@ -11,6 +11,7 @@ import {
   Text,
   View
 } from 'react-native';
+import Navigation from '../core/Navigation';
 
 import Screen from '../core/Screen';
 
