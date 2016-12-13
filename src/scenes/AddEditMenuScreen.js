@@ -18,7 +18,9 @@ import RouteRegistry, {
 
 export default class AddEditMenuScreen extends Screen {
   static getScreenTitleConfig() {
-    return null;
+    return {
+      'title': 'Add/Edit Menu'
+    };
   }
 
   static getRightButtonConfig() {
