@@ -41,6 +41,14 @@ export default class FoodTruck_ReactNative extends Component {
   renderScene(route, navigator) {
     return Navigation.renderScene(route, navigator, this.EventEmitter);
   }
+
+  componentDidMount() {
+    Navigation.registerBackButton();
+  }
+
+  componentWillUnmount() {
+    Navigation.unregisterBackButton();
+  }
 }
 
 const styles = StyleSheet.create({

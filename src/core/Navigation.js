@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  BackAndroid,
   StyleSheet,
   Text,
   TouchableHighlight
@@ -15,6 +16,8 @@ class Navigation {
     this.onBackPressed = this.onBackPressed.bind(this);
     this.push = this.push.bind(this);
     this.pop = this.pop.bind(this);
+    this.registerBackButton = this.registerBackButton.bind(this);
+    this.unregisterBackButton= this.unregisterBackButton.bind(this);
   }
 
   renderScene(route, navigator, emitter) {
@@ -87,7 +90,11 @@ class Navigation {
   }
 
   onBackPressed() {
-    this.pop();
+    if (navigatorObj.state.routeStack.length > 1) {
+      this.pop();
+      return true;
+    }
+    return false;
   }
 
   push(route) {
@@ -96,6 +103,14 @@ class Navigation {
 
   pop() {
     navigatorObj.pop();
+  }
+
+  registerBackButton() {
+    BackAndroid.addEventListener('hardwareBackPress', this.onBackPressed);
+  }
+
+  unregisterBackButton() {
+    BackAndroid.removeEventListener('hardwareBackPress', this.onBackPressed);
   }
 }
 
