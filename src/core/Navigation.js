@@ -11,6 +11,7 @@ var registeredScreens = {};
 class Navigation {
   constructor() {
     this.onRightButtonPressed = this.onRightButtonPressed.bind(this);
+    this.onBackPressed = this.onBackPressed.bind(this);
   }
 
   renderScene(route, navigator, emitter) {
@@ -27,6 +28,21 @@ class Navigation {
     var navigationObj = this;
     return {
       LeftButton: function(route, navigator, index, navState) {
+        let InternalComponent = registeredScreens[route.screenInstanceId]();
+        let config = InternalComponent.getLeftButtonConfig();
+        if (config && config.type) {
+          // TODO: Add code to display actual left butons in header
+        } else if (navState.routeStack[index - 1]) {
+          // There is some screen in the history. We must go to it. Display default back button
+          return (
+            <TouchableHighlight
+              onPress={() => navigationObj.onBackPressed(navigator)}>
+              <Text style={styles.navBarTitle}>
+                Back
+              </Text>
+            </TouchableHighlight>
+          );
+        }
         return null;
       },
       RightButton: function(route, navigator, index, navState) {
@@ -64,6 +80,10 @@ class Navigation {
 
   onRightButtonPressed(route) {
     route.emitter.emit('onRightButtonPressed', {});
+  }
+
+  onBackPressed(navigator) {
+    navigator.pop();
   }
 }
 

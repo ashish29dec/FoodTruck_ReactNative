@@ -21,24 +21,22 @@ import RouteRegistry, {
 export default class AppModeScreen extends Screen {
   static getScreenTitleConfig() {
     return {
-      'title': 'Screen 1'
+      'title': 'Food Truck'
     };
   }
 
   static getRightButtonConfig() {
-    return [
-      {
-        'label': 'Next',
-        'type': 'Text'
-      }
-    ];
+    return null;
+  }
+
+  static getLeftButtonConfig() {
+    return null;
   }
 
   constructor(props) {
     super(props);
 
     this.localEmitter = this.props.route.emitter;
-    this.onButtonPress = this.onButtonPress.bind(this);
     this.onAddEditMenuClicked = this.onAddEditMenuClicked.bind(this);
     this.onOrderModeClicked = this.onOrderModeClicked.bind(this);
     this.onSeeOrdersClicked = this.onSeeOrdersClicked.bind(this);
@@ -69,16 +67,8 @@ export default class AppModeScreen extends Screen {
     );
   }
 
-  onReceiveRightButtonPressedEvent() {
-    this.onButtonPress();
-  }
-
-  onButtonPress() {
-    this.props.navigator.push(RouteRegistry.getRouteWithScreenId(SCREEN_INSTANCE_IDS.ID_SECOND_SCREEN));
-  }
-
   onAddEditMenuClicked() {
-    Alert.alert('Add Edit Menu button clicked!');
+    this.props.navigator.push(RouteRegistry.getRouteWithScreenId(SCREEN_INSTANCE_IDS.ID_ADD_EDIT_MENU_SCREEN));
   }
 
   onOrderModeClicked() {

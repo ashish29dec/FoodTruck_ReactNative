@@ -6,21 +6,28 @@
 
 import React from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View
 } from 'react-native';
 
 import Screen from '../core/Screen';
+import RouteRegistry, {
+  SCREEN_INSTANCE_IDS
+} from '../core/RouteRegistry';
 
-export default class SecondScene extends Screen {
+export default class AddEditMenuScreen extends Screen {
   static getScreenTitleConfig() {
     return null;
   }
 
   static getRightButtonConfig() {
-    return null;
+    return [
+      {
+        'label': 'Next',
+        'type': 'Text'
+      }
+    ];
   }
 
   static getLeftButtonConfig() {
@@ -48,7 +55,8 @@ export default class SecondScene extends Screen {
     );
   }
 
-  componentDidMount() {
+  onReceiveRightButtonPressedEvent() {
+    this.props.navigator.push(RouteRegistry.getRouteWithScreenId(SCREEN_INSTANCE_IDS.ID_SECOND_SCREEN));
   }
 }
 
