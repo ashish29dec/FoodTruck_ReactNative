@@ -51,6 +51,7 @@ export default class AddEditMenuScreen extends Screen {
     };
 
     this.renderDish = this.renderDish.bind(this);
+    this.onNewItemClicked = this.onNewItemClicked.bind(this);
   }
 
   render() {
@@ -60,13 +61,18 @@ export default class AddEditMenuScreen extends Screen {
           dataSource={this.state.dataSource}
           renderRow={this.renderDish}/>
         <Button
-          title="New Item"/>
+          title="New Item"
+          onPress={this.onNewItemClicked}/>
       </View>
     );
   }
 
   renderDish(rowData, sectionID, rowID, highlightRow) {
     // TODO: Render dish here
+  }
+
+  onNewItemClicked() {
+    Navigation.push(RouteRegistry.getRouteWithScreenId(SCREEN_INSTANCE_IDS.ID_ADD_NEW_DISH_SCREEN));
   }
 
   onReceiveRightButtonPressedEvent() {

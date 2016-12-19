@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   BackAndroid,
+  Navigator,
   StyleSheet,
   Text,
   TouchableHighlight
@@ -9,6 +10,10 @@ import PropRegistry from './PropRegistry';
 
 var registeredScreens = {};
 var navigatorObj = null;
+
+export const NAVIGATION_CONSTANTS = {
+  'NAVBAR_HEIGHT': Navigator.NavigationBar.Styles.General.TotalNavHeight,
+};
 
 class Navigation {
   constructor() {
