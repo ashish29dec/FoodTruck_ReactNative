@@ -1,3 +1,4 @@
+
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -6,8 +7,9 @@
 
 import React from 'react';
 import {
+  Button,
+  ListView,
   StyleSheet,
-  Text,
   View
 } from 'react-native';
 
@@ -27,7 +29,7 @@ export default class AddEditMenuScreen extends Screen {
   static getRightButtonConfig() {
     return [
       {
-        'label': 'Next',
+        'label': 'Edit',
         'type': 'Text'
       }
     ];
@@ -39,23 +41,32 @@ export default class AddEditMenuScreen extends Screen {
 
   constructor(props) {
     super(props);
+
+    this.data = [];
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 != r2
+    });
+    this.state = {
+      dataSource: ds.cloneWithRows(this.data),
+    };
+
+    this.renderDish = this.renderDish.bind(this);
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native! SECOND SCENE
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
+      <View style={{flex: 1}}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderDish}/>
+        <Button
+          title="New Item"/>
       </View>
     );
+  }
+
+  renderDish(rowData, sectionID, rowID, highlightRow) {
+    // TODO: Render dish here
   }
 
   onReceiveRightButtonPressedEvent() {
