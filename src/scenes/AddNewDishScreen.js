@@ -46,10 +46,11 @@ export default class AddNewDishScreen extends Screen {
       let optionButtonText = (index == array.length - 1)? '+': '-';
       let optionButtonPressFunction = (index == array.length - 1)? this.onAddNewOption: this.onRemoveOption;
       return (
-        <View key={index} style={{flexDirection: 'row', alignItems: 'stretch'}}>
+        <View key={index} style={{flexDirection: 'row'}}>
           <TextInput
             value={option}
-            onChangeText={(text) => this.onOptionChanged(text, index, array)}/>
+            onChangeText={(text) => this.onOptionChanged(text, index, array)}
+            style={{flex: 1}}/>
           <Button
             title={optionButtonText}
             onPress={() => optionButtonPressFunction(index, array)}/>

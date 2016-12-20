@@ -10,6 +10,7 @@ import {
   Button,
   ListView,
   StyleSheet,
+  Text,
   View
 } from 'react-native';
 
@@ -17,7 +18,9 @@ import Screen from '../core/Screen';
 import RouteRegistry, {
   SCREEN_INSTANCE_IDS
 } from '../core/RouteRegistry';
-import Navigation from '../core/Navigation';
+import Navigation, {
+  NAVIGATION_CONSTANTS
+} from '../core/Navigation';
 
 export default class AddEditMenuScreen extends Screen {
   static getScreenTitleConfig() {
@@ -59,7 +62,8 @@ export default class AddEditMenuScreen extends Screen {
       <View style={{flex: 1}}>
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={this.renderDish}/>
+          renderRow={this.renderDish}
+          style={{top: NAVIGATION_CONSTANTS.NAVBAR_HEIGHT, marginBottom: NAVIGATION_CONSTANTS.NAVBAR_HEIGHT}}/>
         <Button
           title="New Item"
           onPress={this.onNewItemClicked}/>
@@ -69,6 +73,16 @@ export default class AddEditMenuScreen extends Screen {
 
   renderDish(rowData, sectionID, rowID, highlightRow) {
     // TODO: Render dish here
+    return (
+      <View style={{flexDirection: 'row', borderWidth: 1, borderColor: '#000'}}>
+        <Text style={{flex: 1, fontSize: 20}}>
+          {rowData.dishName}
+        </Text>
+        <Text>
+          {rowData.numOptions} options
+        </Text>
+      </View>
+    );
   }
 
   onNewItemClicked() {
