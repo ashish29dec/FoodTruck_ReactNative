@@ -1,15 +1,43 @@
-import React, { Component } from 'react';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
+
+import React from 'react';
 import {
   StyleSheet,
   Button,
   View,
-  Alert
+  Alert,
+  Text
 } from 'react-native';
 
-export default class AppModeScreen extends Component {
+import Screen from '../core/Screen';
+import RouteRegistry, {
+  SCREEN_INSTANCE_IDS
+} from '../core/RouteRegistry';
+import Navigation from '../core/Navigation';
+
+export default class AppModeScreen extends Screen {
+  static getScreenTitleConfig() {
+    return {
+      'title': 'Food Truck'
+    };
+  }
+
+  static getRightButtonConfig() {
+    return null;
+  }
+
+  static getLeftButtonConfig() {
+    return null;
+  }
+
   constructor(props) {
     super(props);
 
+    this.localEmitter = this.props.route.emitter;
     this.onAddEditMenuClicked = this.onAddEditMenuClicked.bind(this);
     this.onOrderModeClicked = this.onOrderModeClicked.bind(this);
     this.onSeeOrdersClicked = this.onSeeOrdersClicked.bind(this);
@@ -41,7 +69,7 @@ export default class AppModeScreen extends Component {
   }
 
   onAddEditMenuClicked() {
-    Alert.alert('Add Edit Menu button clicked!');
+    Navigation.push(RouteRegistry.getRouteWithScreenId(SCREEN_INSTANCE_IDS.ID_ADD_EDIT_MENU_SCREEN));
   }
 
   onOrderModeClicked() {
