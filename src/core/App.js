@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   navBar: {
     borderBottomColor: '#48209A',
     borderBottomWidth: 1,
-    backgroundColor: '#5B29C1'
+    backgroundColor: '#5B29C1',
   },
 });
 

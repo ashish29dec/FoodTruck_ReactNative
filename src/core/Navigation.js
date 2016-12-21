@@ -123,6 +123,10 @@ const styles = StyleSheet.create({
   navBarTitle: {
     fontSize: 20,
     color: '#fff',
+    justifyContent: 'center',
+    position: 'relative',
+    paddingTop: 15,
+    paddingBottom: 15,
   },
 });
 

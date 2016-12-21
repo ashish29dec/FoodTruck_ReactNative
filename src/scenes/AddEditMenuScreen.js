@@ -72,7 +72,6 @@ export default class AddEditMenuScreen extends Screen {
   }
 
   renderDish(rowData, sectionID, rowID, highlightRow) {
-    // TODO: Render dish here
     return (
       <View style={{flexDirection: 'row', borderWidth: 1, borderColor: '#000'}}>
         <Text style={{flex: 1, fontSize: 20}}>

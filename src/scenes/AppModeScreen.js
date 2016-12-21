@@ -73,7 +73,7 @@ export default class AppModeScreen extends Screen {
   }
 
   onOrderModeClicked() {
-    Alert.alert('Order Mode button clicked!');
+    Navigation.push(RouteRegistry.getRouteWithScreenId(SCREEN_INSTANCE_IDS.ID_FOOD_TRUCK_LIST_SCREEN));
   }
 
   onSeeOrdersClicked() {
