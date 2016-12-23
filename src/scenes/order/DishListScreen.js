@@ -5,9 +5,13 @@ import {
   View
 } from 'react-native';
 import Screen from '../../core/Screen';
-import {
+import Navigation, {
   NAVIGATION_CONSTANTS
 } from '../../core/Navigation';
+import RouteRegistry, {
+  SCREEN_INSTANCE_IDS
+} from '../../core/RouteRegistry';
+import PropRegistry from '../../core/PropRegistry';
 
 export default class DishListScreen extends Screen {
   static TITLE = '';
@@ -48,6 +52,7 @@ export default class DishListScreen extends Screen {
     };
 
     this.renderDishes = this.renderDishes.bind(this);
+    this.onDishSelected = this.onDishSelected.bind(this);
   }
 
   componentWillMount() {
@@ -66,9 +71,17 @@ export default class DishListScreen extends Screen {
   renderDishes(rowData, sectionID, rowID, highlightRow) {
     return(
       <Text
-        style={{fontSize: 30, margin: 10, borderWidth: 1, borderColor: '#000', textAlign:'center'}}>
+        style={{fontSize: 30, margin: 10, borderWidth: 1, borderColor: '#000', textAlign:'center'}}
+        onPress={() => this.onDishSelected(rowData)}>
         {rowData.dishName}
       </Text>
     );
+  }
+
+  onDishSelected(dish) {
+    PropRegistry.save(SCREEN_INSTANCE_IDS.ID_ADD_DISH_TO_ORDER_SCREEN, {
+      'name': dish.dishName
+    });
+    Navigation.push(RouteRegistry.getRouteWithScreenId(SCREEN_INSTANCE_IDS.ID_ADD_DISH_TO_ORDER_SCREEN));
   }
 }
