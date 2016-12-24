@@ -8,6 +8,7 @@ export const SCREEN_INSTANCE_IDS = {
   'ID_FOOD_TRUCK_LIST_SCREEN': 'foodtruck.food_truck_list',
   'ID_DISH_LIST_SCREEN': 'foodtruck.food_truck_dish_list',
   'ID_ADD_DISH_TO_ORDER_SCREEN': 'foodtruck.add_dish_to_order',
+  'ID_CART_SCREEN': 'foodtruck.cart',
   'ID_SECOND_SCREEN': 'second'
 };
 
@@ -21,6 +22,7 @@ class RouteRegistry {
     this.routeRegistry[SCREEN_INSTANCE_IDS.ID_FOOD_TRUCK_LIST_SCREEN] = () => new Route(SCREEN_INSTANCE_IDS.ID_FOOD_TRUCK_LIST_SCREEN);
     this.routeRegistry[SCREEN_INSTANCE_IDS.ID_DISH_LIST_SCREEN] = () => new Route(SCREEN_INSTANCE_IDS.ID_DISH_LIST_SCREEN);
     this.routeRegistry[SCREEN_INSTANCE_IDS.ID_ADD_DISH_TO_ORDER_SCREEN] = () => new Route(SCREEN_INSTANCE_IDS.ID_ADD_DISH_TO_ORDER_SCREEN);
+    this.routeRegistry[SCREEN_INSTANCE_IDS.ID_CART_SCREEN] = () => new Route(SCREEN_INSTANCE_IDS.ID_CART_SCREEN);
     this.routeRegistry[SCREEN_INSTANCE_IDS.ID_SECOND_SCREEN] = () => new Route(SCREEN_INSTANCE_IDS.ID_SECOND_SCREEN);
   }
 

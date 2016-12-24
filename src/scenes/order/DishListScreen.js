@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Button,
   ListView,
   Text,
   View
@@ -35,13 +36,16 @@ export default class DishListScreen extends Screen {
 
     this.data = [
       {
-        dishName: 'California Steak Burger'
+        dishName: 'California Steak Burger',
+        id: 0,
       },
       {
-        dishName: 'Chicken Sandwich'
+        dishName: 'Chicken Sandwich',
+        id: 1,
       },
       {
-        dishName: 'Salad'
+        dishName: 'Salad',
+        id: 2,
       }
     ];
     const ds = new ListView.DataSource({
@@ -49,10 +53,13 @@ export default class DishListScreen extends Screen {
     });
     this.state = {
       dataSource: ds.cloneWithRows(this.data),
+      cart: []
     };
 
     this.renderDishes = this.renderDishes.bind(this);
     this.onDishSelected = this.onDishSelected.bind(this);
+    this.onCheckoutClicked = this.onCheckoutClicked.bind(this);
+    this.onOrderModified = this.onOrderModified.bind(this);
   }
 
   componentWillMount() {
@@ -60,11 +67,23 @@ export default class DishListScreen extends Screen {
   }
 
   render() {
+    let checkoutButton = null;
+    if (this.state.cart.length > 0) {
+      let checkoutTitle = 'Check Out (' + this.state.cart.length + ')';
+      checkoutButton = (
+        <Button
+          title={checkoutTitle}
+          onPress={this.onCheckoutClicked}/>
+      );
+    }
     return (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this.renderDishes}
-        style={{top: NAVIGATION_CONSTANTS.NAVBAR_HEIGHT, marginBottom: NAVIGATION_CONSTANTS.NAVBAR_HEIGHT}}/>
+      <View style={{flex: 1}}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderDishes}
+          style={{top: NAVIGATION_CONSTANTS.NAVBAR_HEIGHT, marginBottom: NAVIGATION_CONSTANTS.NAVBAR_HEIGHT}}/>
+        {checkoutButton}
+      </View>
     );
   }
 
@@ -78,10 +97,39 @@ export default class DishListScreen extends Screen {
     );
   }
 
+  componentDidMount() {
+    this.props.global_emitter.addListener('onOrderModified', this.onOrderModified);
+  }
+
+  componentWillUnmount() {
+    this.props.global_emitter.removeListener('onOrderModified', this.onOrderModified);
+  }
+
   onDishSelected(dish) {
     PropRegistry.save(SCREEN_INSTANCE_IDS.ID_ADD_DISH_TO_ORDER_SCREEN, {
-      'name': dish.dishName
+      'name': dish.dishName,
+      'id': dish.id,
     });
     Navigation.push(RouteRegistry.getRouteWithScreenId(SCREEN_INSTANCE_IDS.ID_ADD_DISH_TO_ORDER_SCREEN));
+  }
+
+  onOrderModified(params) {
+    let newOrder = this.state.cart;
+    if (params.action === 'added') {
+      newOrder.push(params.order);
+    } else if (params.action === 'remove') {
+      let indexInCart = params.index;
+      newOrder.splice(indexInCart, 1);
+    }
+    this.setState({
+      cart: newOrder
+    });
+  }
+
+  onCheckoutClicked() {
+    PropRegistry.save(SCREEN_INSTANCE_IDS.ID_CART_SCREEN, {
+      'cart': this.state.cart,
+    });
+    Navigation.push(RouteRegistry.getRouteWithScreenId(SCREEN_INSTANCE_IDS.ID_CART_SCREEN));
   }
 }

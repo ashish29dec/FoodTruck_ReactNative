@@ -30,10 +30,12 @@ export default class AddDishToOrderScreen extends Screen {
 
     this.options = [
       {
-        name: 'Egg'
+        name: 'Egg',
+        selected: false
       },
       {
-        name: 'Fries'
+        name: 'Fries',
+        selected: false
       }
     ];
 
@@ -44,6 +46,7 @@ export default class AddDishToOrderScreen extends Screen {
     this.onAddingDishToOrder = this.onAddingDishToOrder.bind(this);
     this.onOptionToggled = this.onOptionToggled.bind(this);
     this.onNotesModified = this.onNotesModified.bind(this);
+    this.getSelectedOptions = this.getSelectedOptions.bind(this);
   }
 
   componentWillMount() {
@@ -87,12 +90,32 @@ export default class AddDishToOrderScreen extends Screen {
     );
   }
 
+  getSelectedOptions() {
+    let selectedOptions = [];
+    this.options.map((option, index) => {
+      if(option.selected) {
+        selectedOptions.push(option);
+      }
+    });
+    return selectedOptions;
+  }
+
   onAddingDishToOrder() {
-    // TODO
+
+    this.props.global_emitter.emit('onOrderModified', {
+      'action': 'added',
+      'order': {
+        'dishName': this.props.name,
+        'dishId': this.props.id,
+        'options': this.getSelectedOptions(),
+        'notes': this.state.notes
+      }
+    });
+    Navigation.pop();
   }
 
   onOptionToggled(checked, index) {
-    // TODO:
+    this.options[index].selected = checked;
   }
 
   onNotesModified(notes) {

@@ -21,6 +21,7 @@ export default class FoodTruck_ReactNative extends Component {
 
     registerScreens();
     this.EventEmitter = new EventEmitter();
+    this.renderScene = this.renderScene.bind(this);
   }
 
   render() {
